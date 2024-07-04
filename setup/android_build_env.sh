@@ -6,7 +6,10 @@
 
 # Script to setup an AOSP Build environment on Ubuntu and Linux Mint
 
+bash "$(dirname "$0")"/platform-tools.sh
+
 LATEST_MAKE_VERSION="4.4.1"
+LATEST_CCACHE_VERSION="4.10.1"
 UBUNTU_16_PACKAGES="libesd0-dev"
 UBUNTU_20_PACKAGES="libncurses5 curl python-is-python3"
 DEBIAN_10_PACKAGES="libncurses5"
@@ -25,8 +28,8 @@ PACKAGES="${UBUNTU_20_PACKAGES}"
 
 sudo DEBIAN_FRONTEND=noninteractive \
     apt install \
-    adb autoconf automake axel bc bison build-essential \
-    ccache clang cmake curl expat fastboot flex g++ \
+    autoconf automake axel bc bison build-essential \
+    clang cmake curl expat flex g++ \
     g++-multilib gawk gcc gcc-multilib git git-lfs gnupg gperf \
     htop imagemagick lib32ncurses5-dev lib32z1-dev libtinfo5 libc6-dev libcap-dev \
     libexpat1-dev libgmp-dev '^liblz4-.*' '^liblzma.*' libmpc-dev libmpfr-dev libncurses5-dev \
@@ -54,3 +57,21 @@ fi
 echo "Installing repo"
 sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
 sudo chmod a+rx /usr/local/bin/repo
+
+echo "Installing ccache"
+bash "$(dirname "$0")"/ccache.sh "${LATEST_CCACHE_VERSION}"
+
+# Populating .bashrc
+echo "Populating bashrc"
+echo "" >> "$HOME/.bashrc"
+echo 'alias rs="repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags"' >> "$HOME/.bashrc"
+echo 'alias p="source build/envsetup.sh"' >> "$HOME/.bashrc"
+echo 'alias l="lunch lineage_taoyao-userdebug"' >> "$HOME/.bashrc"
+echo 'alias pl="p && l"' >> "$HOME/.bashrc"
+echo 'alias mk="m evolution -j$(nproc --all)"' >> "$HOME/.bashrc"
+echo 'alias plm="pl && mk"' >> "$HOME/.bashrc"
+echo 'alias mkc="m clean && mk"' >> "$HOME/.bashrc"
+echo 'alias plmc="pl && mkc"' >> "$HOME/.bashrc"
+echo 'alias mkic="m installclean && mk"' >> "$HOME/.bashrc"
+echo 'alias plmic="pl && mkic"' >> "$HOME/.bashrc"
+source "$HOME/.bashrc"
