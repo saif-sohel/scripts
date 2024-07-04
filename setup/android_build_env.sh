@@ -10,11 +10,6 @@ bash "$(dirname "$0")"/platform-tools.sh
 
 LATEST_MAKE_VERSION="4.4.1"
 LATEST_CCACHE_VERSION="4.10.1"
-UBUNTU_16_PACKAGES="libesd0-dev"
-UBUNTU_20_PACKAGES="libncurses5 curl python-is-python3"
-DEBIAN_10_PACKAGES="libncurses5"
-DEBIAN_11_PACKAGES="libncurses5"
-PACKAGES=""
 
 sudo apt install software-properties-common -y
 sudo apt update
@@ -24,21 +19,19 @@ sudo apt install lsb-core -y
 
 LSB_RELEASE="$(lsb_release -d | cut -d ':' -f 2 | sed -e 's/^[[:space:]]*//')"
 
-PACKAGES="${UBUNTU_20_PACKAGES}"
-
 sudo DEBIAN_FRONTEND=noninteractive \
     apt install \
     autoconf automake axel bc bison build-essential \
     clang cmake curl expat flex g++ \
     g++-multilib gawk gcc gcc-multilib git git-lfs gnupg gperf \
-    htop imagemagick lib32ncurses5-dev lib32z1-dev libtinfo5 libc6-dev libcap-dev \
-    libexpat1-dev libgmp-dev '^liblz4-.*' '^liblzma.*' libmpc-dev libmpfr-dev libncurses5-dev \
+    htop imagemagick lib32ncurses-dev lib32z1-dev libtinfo6 libc6-dev libcap-dev \
+    libexpat1-dev libgmp-dev '^liblz4-.*' '^liblzma.*' libmpc-dev libmpfr-dev libncurses-dev \
     libsdl1.2-dev libssl-dev libtool libxml2 libxml2-utils '^lzma.*' lzop \
     maven ncftp ncurses-dev patch patchelf pkg-config pngcrush \
-    pngquant python2.7 python-all-dev re2c schedtool squashfs-tools subversion \
+    pngquant python-all-dev re2c schedtool squashfs-tools subversion \
     texinfo unzip w3m xsltproc zip zlib1g-dev lzip \
     libxml-simple-perl libswitch-perl apt-utils rsync \
-    ${PACKAGES} -y
+    libncurses6 curl python-is-python3 -y
 
 echo -e "Setting up udev rules for adb!"
 sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L https://raw.githubusercontent.com/richardqcarvalho/android-udev-rules/master/51-android.rules
