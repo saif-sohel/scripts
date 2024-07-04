@@ -15,7 +15,7 @@ sudo apt install software-properties-common -y
 sudo apt update
 
 # Install lsb-core packages
-sudo apt install lsb-core -y
+sudo apt install lsb-release -y
 
 LSB_RELEASE="$(lsb_release -d | cut -d ':' -f 2 | sed -e 's/^[[:space:]]*//')"
 
