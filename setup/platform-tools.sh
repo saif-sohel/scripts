@@ -7,4 +7,5 @@ echo "# add Android SDK platform tools to path" >> "$HOME/.profile"
 echo "if [ -d "$HOME/android/platform-tools" ]; then" >> "$HOME/.profile"
 echo '    PATH="$HOME/android/platform-tools:$PATH"' >> "$HOME/.profile"
 echo "fi" >> "$HOME/.profile"
+source "$HOME/.profile"
 rm platform-tools-latest-linux.zip
