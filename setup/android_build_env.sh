@@ -56,18 +56,3 @@ sudo chmod a+rx /usr/local/bin/repo
 
 echo "Installing ccache"
 bash "$(dirname "$0")"/ccache.sh "${LATEST_CCACHE_VERSION}"
-
-# Populating .bashrc
-echo "Populating bashrc"
-echo "" >> "$HOME/.bashrc"
-echo 'alias rs="repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags"' >> "$HOME/.bashrc"
-echo 'alias p="source build/envsetup.sh"' >> "$HOME/.bashrc"
-echo 'alias l="lunch lineage_taoyao-userdebug"' >> "$HOME/.bashrc"
-echo 'alias pl="p && l"' >> "$HOME/.bashrc"
-echo 'alias mk="m evolution -j$(nproc --all)"' >> "$HOME/.bashrc"
-echo 'alias plm="pl && mk"' >> "$HOME/.bashrc"
-echo 'alias mkc="m clean && mk"' >> "$HOME/.bashrc"
-echo 'alias plmc="pl && mkc"' >> "$HOME/.bashrc"
-echo 'alias mkic="m installclean && mk"' >> "$HOME/.bashrc"
-echo 'alias plmic="pl && mkic"' >> "$HOME/.bashrc"
-source "$HOME/.bashrc"
