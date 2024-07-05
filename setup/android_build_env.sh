@@ -28,13 +28,13 @@ sudo DEBIAN_FRONTEND=noninteractive \
     libexpat1-dev libgmp-dev '^liblz4-.*' '^liblzma.*' libmpc-dev libmpfr-dev libncurses-dev \
     libsdl1.2-dev libssl-dev libtool libxml2 libxml2-utils '^lzma.*' lzop \
     maven ncftp ncurses-dev patch patchelf pkg-config pngcrush \
-    pngquant python3.13 python3-all-dev re2c schedtool squashfs-tools subversion \
+    pngquant python3.12 python3-all-dev re2c schedtool squashfs-tools subversion \
     texinfo unzip w3m xsltproc zip zlib1g-dev lzip \
     libxml-simple-perl libswitch-perl apt-utils rsync \
     libncurses6 curl python-is-python3 -y
 
 echo "Updating python symbolic link"
-sudo ln -sf /usr/bin/python3.13 /usr/bin/python3
+sudo ln -sf /usr/bin/python3.12 /usr/bin/python3
 
 echo -e "Setting up udev rules for adb!"
 sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L https://raw.githubusercontent.com/richardqcarvalho/android-udev-rules/master/51-android.rules
