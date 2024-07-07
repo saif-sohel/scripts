@@ -56,3 +56,6 @@ sudo chmod a+rx /usr/local/bin/repo
 
 echo "Installing ccache"
 bash "$(dirname "$0")"/ccache.sh "${LATEST_CCACHE_VERSION}"
+
+echo "Adding workaround to avoid nsjail error"
+echo "kernel.apparmor_restrict_unprivileged_userns=0" | sudo tee /usr/lib/sysctl.d/10-apparmor.conf
