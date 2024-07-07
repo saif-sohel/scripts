@@ -59,3 +59,6 @@ bash "$(dirname "$0")"/ccache.sh "${LATEST_CCACHE_VERSION}"
 
 echo "Adding workaround to avoid nsjail error"
 echo "kernel.apparmor_restrict_unprivileged_userns=0" | sudo tee /usr/lib/sysctl.d/10-apparmor.conf
+
+source "$HOME/.bashrc"
+source "$HOME/.profile"
